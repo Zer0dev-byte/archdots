@@ -40,16 +40,10 @@ if [ -f "$ISYAY" ]; then
     echo -e "yay was located, moving on.\n"
     yay -Suy
 else 
-    read -n1 -rep 'Would you like to download ? (y,n)' YAY
-    if [[ $YAY == "Y" || $YAY == "y" ]]; then
-        git clone https://aur.archlinux.org/yay-git.git
-        cd yay-git
-        makepkg -si
-        cd ..
-    echo -e "yay was not located, please install yay. Exiting script.\n"
-    else
-        exit 
-    fi
+    git clone https://aur.archlinux.org/yay-git.git
+    cd yay-git
+    makepkg -si
+    cd ..
 fi
 
 ### Disable wifi powersave mode ###
@@ -106,9 +100,11 @@ read -n1 -rep 'Would you like to install the starship shell? (y,n)' STAR
 if [[ $STAR == "Y" || $STAR == "y" ]]; then
     # install the starship shell
     echo -e "Updating .bashrc...\n"
-    echo -e '\neval "$(starship init bash)"' >> ~/.bashrc
+    cp .zshrc ~/
     echo -e "copying starship config file to ~/.confg ...\n"
     cp starship.toml ~/.config/
+    sudo pacman -S zsh
+    chsh -s /usr/bin/zsh
 fi
 
 ### Install software for Asus ROG laptops ###
