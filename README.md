@@ -32,3 +32,22 @@ noto-fonts-emoji lxappearance xfce4-settings sddm-git sddm-sugar-candy-git
 Or you can use the attached script "set-hypr" to install everything for you.
 
 PS: I took everything from [SolDoesTech repo](https://github.com/SolDoesTech/HyprV3)
+
+## Wifi
+
+#### Inside of the arch ISO
+
+```bash
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect <wifiname>
+station wlan0 show
+```
+
+#### Inside of the installed version of arch if you are using NetworkManager
+
+```
+nmcli r wifi on
+nmcli d wifi list
+nmcli d wifi connect <wifiname> password <password>
+```
